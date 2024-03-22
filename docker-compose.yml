@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  db:
+    container_name: sber_db
+    image: postgres:13-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  api:
+    container_name: sber_api
+    build:
+      context: .
+    restart: always
+    ports:
+      - "80:80"
+    command: bash -c "alembic upgrade head && python main.py"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

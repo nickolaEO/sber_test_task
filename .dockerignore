@@ -1,0 +1,42 @@
+.git
+.dockerignore
+.gitignore
+.gitattributes
+.isort.cfg
+Makefile
+Dockerfile
+README.md
+docs
+tests
+
+# Editors
+.idea/
+.vscode/
+__pycache__
+
+# Environments
+.venv
+.env
+env/
+venv/
+ENV/
+
+# Unit test / coverage reports
+.coverage
+.coverage.*
+.cache
+coverage.xml
+*.cover
+.pytest_cache/
+
+Procfile
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.log
+.mypy_cache
+
+# Dynaconf settings
+.secrets.*
+*.local.*

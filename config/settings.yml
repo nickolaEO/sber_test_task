@@ -1,0 +1,49 @@
+dynaconf_merge: true
+default:
+  NAME: sber_test_task
+  HOST: 0.0.0.0
+  PORT: 80
+  ENDPOINT: api
+  WORKERS: 1
+  FAST_API_PATH: app.application:app
+  LOG_LEVEL: info
+  RELOADED: False
+  CORS:
+    allow_origins: [ '*' ]
+    allow_methods: '*'
+    allow_headers: '*'
+    allow_credentials: True
+    expose_headers: '*'
+    max_age: 3600
+
+  POSTGRES:
+    dialect: asyncpg
+    host: db  # название контейнера с БД
+    port: 5432
+    login: postgres
+    password: postgres
+    database: postgres
+
+  LOGGING:
+    version: 1
+    disable_existing_loggers: false
+    formatters:
+      default:
+        format: "%(levelname)-8s# %(filename)s[LINE:%(lineno)d] [%(asctime)s.%(msecs)d]:  %(message)s"
+      access:
+        format: "%(levelname)-8s# [%(asctime)s.%(msecs)d] %(client_addr)s - '%(request_line)s' %(status_code)s"
+    handlers:
+      console:
+        level: DEBUG
+        class: logging.StreamHandler
+        formatter: default
+        stream: ext://sys.stdout
+      error:
+        level: ERROR
+        class: logging.StreamHandler
+        formatter: default
+        stream: ext://sys.stderr
+    loggers:
+      root:
+        level: INFO
+        handlers: [ console, error ]

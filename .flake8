@@ -1,0 +1,7 @@
+[flake8]
+extend-ignore = E203
+extend-exclude = db, .venv, tests
+max-line-length = 120
+statistics = True
+count = True
+no-accept-encodings = True
